@@ -77,8 +77,8 @@ AND customers.Country = 'Germany'
 --6
 SELECT LastName 
 FROM customers 
-inner join sales 
-inner join sales_items on customers.CustomerId = sales.CustomerId and sales.SalesId = sales_items.SalesId 
+INNER JOIN sales 
+INNER JOIN sales_items ON customers.CustomerId = sales.CustomerId AND sales.SalesId = sales_items.SalesId 
 GROUP BY LastName 
 HAVING SUM(sales_items.Quantity) > 30;
 
@@ -87,7 +87,8 @@ SELECT (
         (SELECT LastName 
         FROM customers 
         WHERE customers.CustomerId = sales.CustomerId)
-        FROM sales where sales.SalesId = sales_items.SalesId
+            FROM sales 
+            WHERE sales.SalesId = sales_items.SalesId
         ) as LastName 
     FROM sales_items 
     GROUP BY LastName 
